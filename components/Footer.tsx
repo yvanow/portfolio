@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-5">
           <a
-            href="https://github.com/yvan-djassah"
+            href="https://github.com/yvanow"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-500 transition-colors"
@@ -36,6 +36,15 @@ export default function Footer() {
             aria-label="Email"
           >
             <Mail size={18} />
+          </a>
+          <a
+            href="https://maps.google.com/?q=Togo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-blue-500 hover:drop-shadow-lg hover:drop-shadow-blue-500/50 transition-all duration-300"
+            aria-label="Location"
+          >
+            <MapPin size={18} />
           </a>
         </div>
 

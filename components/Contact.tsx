@@ -1,26 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Linkedin, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    // Initialiser EmailJS avec votre clé publique
+    emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // À remplacer avec votre clé
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Using Formspree — replace YOUR_FORM_ID with your actual Formspree form ID
-    const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-    setLoading(false);
-    if (res.ok) {
+    setError("");
+
+    try {
+      await emailjs.send("service_1234567890", "template_1234567890", {
+        to_email: "djassahyvan@gmail.com",
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+      });
+
       setSent(true);
       setForm({ name: "", email: "", message: "" });
+      setTimeout(() => setSent(false), 5000); // Reset après 5 secondes
+    } catch (err) {
+      setError("Erreur lors de l'envoi. Veuillez réessayer.");
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,8 +60,8 @@ export default function Contact() {
                 href="mailto:djassahyvan@gmail.com"
                 className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
               >
-                <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-                  <Mail size={18} className="text-blue-500" />
+                <div className="w-10 h-10 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 flex items-center justify-center transition-colors">
+                  <Mail size={18} className="text-blue-500 group-hover:text-blue-600 transition-colors" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">Email</p>
@@ -60,8 +75,8 @@ export default function Contact() {
                 href="tel:+22893011652"
                 className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
               >
-                <div className="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
-                  <Phone size={18} className="text-green-500" />
+                <div className="w-10 h-10 rounded-lg bg-green-500/10 group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                  <Phone size={18} className="text-green-500 group-hover:text-blue-500 transition-colors" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">Téléphone</p>
@@ -71,15 +86,20 @@ export default function Contact() {
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800">
-                <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
-                  <MapPin size={18} className="text-orange-500" />
+              <a
+                href="https://www.google.com/maps/search/Légbasitto,+Lomé,+Togo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-orange-500/10 group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                  <MapPin size={18} className="text-orange-500 group-hover:text-blue-500 transition-colors" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">Localisation</p>
-                  <p className="font-medium">Lomé, TOGO</p>
+                  <p className="font-medium group-hover:text-blue-500 transition-colors">Lomé, Légbasitto</p>
                 </div>
-              </div>
+              </a>
 
               <a
                 href="https://www.linkedin.com/in/yvan-djassah-a843b0339"
@@ -87,8 +107,8 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
               >
-                <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
-                  <Linkedin size={18} className="text-blue-600" />
+                <div className="w-10 h-10 rounded-lg bg-blue-600/10 group-hover:bg-blue-500/10 flex items-center justify-center transition-colors">
+                  <Linkedin size={18} className="text-blue-600 group-hover:text-blue-500 transition-colors" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">LinkedIn</p>
@@ -118,6 +138,11 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                {error && (
+                  <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 text-sm">
+                    {error}
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-medium mb-2">Nom complet</label>
                   <input
@@ -159,7 +184,7 @@ export default function Contact() {
                   {loading ? "Envoi..." : (<><Send size={16} /> Envoyer le message</>)}
                 </button>
                 <p className="text-xs text-gray-400 text-center">
-                  * Configurez Formspree : remplacez YOUR_FORM_ID dans Contact.tsx
+                  * Configurez EmailJS : remplacez YOUR_EMAILJS_PUBLIC_KEY dans Contact.tsx
                 </p>
               </form>
             )}

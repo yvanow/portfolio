@@ -37,18 +37,6 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Portfolio personnel",
-    description:
-      "Ce portfolio — conçu avec Next.js, TypeScript et Tailwind CSS pour présenter mon profil et mes compétences.",
-    longDescription:
-      "Projet en cours de développement. Objectif : créer un portfolio moderne, responsive et optimisé SEO pour présenter mon profil, mes compétences techniques et mon parcours à des recruteurs et managers techniques.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    status: "in-progress",
-    date: "2026",
-    github: "https://github.com/yvan-djassah",
-  },
-  {
-    id: 4,
     title: "Gestionnaire de tâches full stack",
     description:
       "Application full stack de gestion de tâches avec authentification, filtres et recherche — en cours de planification.",
