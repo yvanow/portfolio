@@ -26,17 +26,6 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Application de gestion des employés",
-    description:
-      "Application web développée lors d'un hackathon, permettant la gestion complète des employés d'une organisation.",
-    longDescription:
-      "Projet réalisé dans le cadre de hackathons & coding challenges (02/2026 – 04/2026). Mise en place d'une application web de gestion des employés avec focus sur la rapidité de conception et le travail en équipe sous contrainte de temps.",
-    tech: ["Java", "Spring Boot", "HTML", "CSS", "JavaScript"],
-    status: "completed",
-    date: "02/2026 – 04/2026",
-  },
-  {
-    id: 3,
     title: "Gestionnaire de tâches full stack",
     description:
       "Application full stack de gestion de tâches avec authentification, filtres et recherche — en cours de planification.",

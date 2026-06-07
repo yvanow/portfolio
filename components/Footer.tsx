@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Heart, MapPin } from "lucide-react";
+import { Github, Linkedin, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -31,13 +31,6 @@ export default function Footer() {
             <Linkedin size={18} />
           </a>
           <a
-            href="mailto:djassahyvan@gmail.com"
-            className="text-gray-400 hover:text-blue-500 transition-colors"
-            aria-label="Email"
-          >
-            <Mail size={18} />
-          </a>
-          <a
             href="https://maps.google.com/?q=Togo"
             target="_blank"
             rel="noopener noreferrer"
@@ -47,10 +40,6 @@ export default function Footer() {
             <MapPin size={18} />
           </a>
         </div>
-
-        <p className="text-sm text-gray-400 flex items-center gap-1">
-          Fait avec <Heart size={12} className="text-red-400" /> par Yvan DJASSAH · {new Date().getFullYear()}
-        </p>
       </div>
     </footer>
   );

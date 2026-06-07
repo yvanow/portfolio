@@ -21,14 +21,6 @@ const timeline = [
   },
   {
     icon: Briefcase,
-    title: "Développeur d'applications – Hackathons & Coding Challenges",
-    org: "Application web de gestion des employés",
-    date: "02/2026 – 04/2026",
-    color: "text-purple-500",
-    bg: "bg-purple-500/10",
-  },
-  {
-    icon: Briefcase,
     title: "Développeur web – Freelance",
     org: "Backend de gestion budgétaire scolaire (Java Spring Boot)",
     date: "09/2025 – 12/2025",
@@ -60,8 +52,7 @@ export default function About() {
           <div className="space-y-6">
             <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
               Je suis <strong className="text-gray-900 dark:text-white">Yvan DJASSAH</strong>,
-              20 ans, étudiant en informatique à l'IAI TOGO, spécialisé en{" "}
-              <span className="text-blue-500 font-medium">systèmes d'information et cybersécurité</span>.
+              19 ans, étudiant en informatique à l'IAI TOGO.
             </p>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
               Je maîtrise la programmation orientée objet (Java, Python, C/C++),
@@ -90,10 +81,6 @@ export default function About() {
               <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
                 <p className="text-sm text-gray-500 mb-1">Statut</p>
                 <p className="font-medium text-green-500">Disponible</p>
-              </div>
-              <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-                <p className="text-sm text-gray-500 mb-1">Permis</p>
-                <p className="font-medium">Permis B</p>
               </div>
             </div>
           </div>

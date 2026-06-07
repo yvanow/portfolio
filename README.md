@@ -30,20 +30,10 @@ portfolio/
 
 ## ⚙️ Configuration
 
-### Formulaire de contact (Gmail + Nodemailer)
-1. **Activer l'authentification à deux facteurs** sur votre compte Gmail
-2. **Générer un mot de passe d'application** :
-   - Aller sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
-   - Sélectionner "Mail" et "Windows (or other device)"
-   - Copier le mot de passe généré
-3. **Configurer les variables d'environnement** :
-   - Copier `.env.example` en `.env.local`
-   - Remplir vos credentials Gmail :
-   ```env
-   EMAIL_USER=votre-email@gmail.com
-   EMAIL_PASSWORD=mot-de-passe-application-16-caracteres
-   ```
-4. **L'API route** gère automatiquement l'envoi via `app/api/send-email/route.ts`
+### Lien de Contact Email
+- Le bouton **Email** dans la section Contact utilise un lien `mailto:djassahyvan@gmail.com`
+- Quand on clique dessus, ça ouvre automatiquement l'application d'envoi de mail par défaut avec l'email renseigné
+- Fonctionne sur tous les appareils et navigateurs
 
 ### CV téléchargeable
 Placer votre fichier CV en PDF dans `public/cv.pdf`
@@ -109,16 +99,14 @@ emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_KEY);
 
 ## 📋 Checklist avant déploiement
 
-- [ ] Configurer Gmail (2FA + App Password dans `.env.local`)
+- [ ] Vérifier le lien email mailto: fonctionne bien
 - [ ] Mettre à jour les liens GitHub/LinkedIn dans Footer
 - [ ] Ajouter votre CV dans `public/cv.pdf`
 - [ ] Ajouter votre photo dans `public/profile.jpg`
-- [ ] Tester le formulaire de contact en développement
 - [ ] Vérifier les zones sombres/claires du thème
 - [ ] Tester sur mobile
 - [ ] Faire un build : `npm run build`
 - [ ] Pousser sur GitHub
-- [ ] **Sur Vercel** : Ajouter les variables d'environnement (EMAIL_USER, EMAIL_PASSWORD)
 - [ ] Déployer sur Vercel
 
 ## 🛠 Stack
