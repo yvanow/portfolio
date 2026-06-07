@@ -21,19 +21,20 @@ export default function Contact() {
             </p>
 
             <div className="space-y-4">
-            <div
-              className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group cursor-pointer"
-            >
-              <div className="w-10 h-10 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 flex items-center justify-center transition-colors">
-                <Mail size={18} className="text-blue-500 group-hover:text-blue-600 transition-colors" />
-              </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-0.5">Email</p>
-                <p className="font-medium group-hover:text-blue-500 transition-colors">
-                  djassahyvan@gmail.com
-                </p>
-              </div>
-            </div>
+              <a
+                href="mailto:djassahyvan@gmail.com"
+                className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 flex items-center justify-center transition-colors">
+                  <Mail size={18} className="text-blue-500 group-hover:text-blue-600 transition-colors" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 mb-0.5">Email</p>
+                  <p className="font-medium group-hover:text-blue-500 transition-colors">
+                    djassahyvan@gmail.com
+                  </p>
+                </div>
+              </a>
 
               <a
                 href="tel:+22893011652"

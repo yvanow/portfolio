@@ -1,9 +1,9 @@
 export const skills = {
   backend: [
-    { name: "Java Spring Boot", level: 65 },
-    { name: "PHP", level: 50 },
-    { name: "Django", level: 45 },
-    { name: "Python", level: 60 },
+    { name: "Java", level: 30 },
+    { name: "PHP", level: 40 },
+    { name: "Django", level: 20 },
+    { name: "Python", level: 50 },
     { name: "Node.js", level: 35 },
   ],
   frontend: [
@@ -25,9 +25,9 @@ export const skills = {
     { name: "C#", level: 20 },
   ],
   network: [
-    { name: "Cisco CCNA", level: 65 },
+    { name: "Cisco CCNA", level: 45 },
     { name: "Routage / Switching", level: 60 },
-    { name: "VLANs / IPv4 / IPv6", level: 55 },
-    { name: "Sécurité réseau", level: 45 },
+    { name: "VLANs / IPv4 / IPv6", level: 50 },
+    { name: "Sécurité réseau", level: 10 },
   ],
 };
