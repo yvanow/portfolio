@@ -30,18 +30,20 @@ portfolio/
 
 ## ⚙️ Configuration
 
-### Formulaire de contact (EmailJS)
-1. Créer un compte sur [emailjs.com](https://emailjs.com)
-2. Connecter votre compte Gmail
-3. Récupérer vos IDs :
-   - **Public Key** (dans Settings)
-   - **Service ID** (dans Email Services)
-   - **Template ID** (dans Email Templates)
-4. Remplacer dans `components/Contact.tsx` (ligne 15, 24, 25) :
-   ```javascript
-   emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Votre Public Key
-   await emailjs.send("service_XXXXX", "template_XXXXX", { ... }); // Vos IDs
+### Formulaire de contact (Gmail + Nodemailer)
+1. **Activer l'authentification à deux facteurs** sur votre compte Gmail
+2. **Générer un mot de passe d'application** :
+   - Aller sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+   - Sélectionner "Mail" et "Windows (or other device)"
+   - Copier le mot de passe généré
+3. **Configurer les variables d'environnement** :
+   - Copier `.env.example` en `.env.local`
+   - Remplir vos credentials Gmail :
+   ```env
+   EMAIL_USER=votre-email@gmail.com
+   EMAIL_PASSWORD=mot-de-passe-application-16-caracteres
    ```
+4. **L'API route** gère automatiquement l'envoi via `app/api/send-email/route.ts`
 
 ### CV téléchargeable
 Placer votre fichier CV en PDF dans `public/cv.pdf`
@@ -107,7 +109,7 @@ emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_KEY);
 
 ## 📋 Checklist avant déploiement
 
-- [ ] Configurer EmailJS (Public Key, Service ID, Template ID)
+- [ ] Configurer Gmail (2FA + App Password dans `.env.local`)
 - [ ] Mettre à jour les liens GitHub/LinkedIn dans Footer
 - [ ] Ajouter votre CV dans `public/cv.pdf`
 - [ ] Ajouter votre photo dans `public/profile.jpg`
@@ -116,6 +118,7 @@ emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_KEY);
 - [ ] Tester sur mobile
 - [ ] Faire un build : `npm run build`
 - [ ] Pousser sur GitHub
+- [ ] **Sur Vercel** : Ajouter les variables d'environnement (EMAIL_USER, EMAIL_PASSWORD)
 - [ ] Déployer sur Vercel
 
 ## 🛠 Stack

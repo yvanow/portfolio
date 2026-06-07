@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Mail, Phone, MapPin, Linkedin, Send } from "lucide-react";
-import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -21,18 +20,22 @@ export default function Contact() {
     setError("");
 
     try {
-      await emailjs.send("service_1234567890", "template_1234567890", {
-        to_email: "djassahyvan@gmail.com",
-        from_name: form.name,
-        from_email: form.email,
-        message: form.message,
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
       });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Erreur lors de l'envoi");
+      }
 
       setSent(true);
       setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setSent(false), 5000); // Reset après 5 secondes
+      setTimeout(() => setSent(false), 5000);
     } catch (err) {
-      setError("Erreur lors de l'envoi. Veuillez réessayer.");
+      setError(err instanceof Error ? err.message : "Erreur lors de l'envoi. Veuillez réessayer.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -102,7 +105,7 @@ export default function Contact() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/yvan-djassah-a843b0339"
+                href="https://www.linkedin.com/in/yvan-djassah-a843b0339/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500/50 transition-colors group"
@@ -113,7 +116,7 @@ export default function Contact() {
                 <div>
                   <p className="text-xs text-gray-500 mb-0.5">LinkedIn</p>
                   <p className="font-medium group-hover:text-blue-500 transition-colors">
-                    yvan-djassah-a843b0339
+                    Yvan DJASSAH
                   </p>
                 </div>
               </a>
@@ -184,7 +187,7 @@ export default function Contact() {
                   {loading ? "Envoi..." : (<><Send size={16} /> Envoyer le message</>)}
                 </button>
                 <p className="text-xs text-gray-400 text-center">
-                  * Configurez EmailJS : remplacez YOUR_EMAILJS_PUBLIC_KEY dans Contact.tsx
+                  * Configurez les variables d'environnement : EMAIL_USER et EMAIL_PASSWORD
                 </p>
               </form>
             )}

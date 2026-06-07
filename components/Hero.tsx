@@ -99,7 +99,7 @@ export default function Hero() {
             <Github size={22} />
           </a>
           <a
-            href="https://www.linkedin.com/in/yvan-djassah-a843b0339"
+            href="https://www.linkedin.com/in/yvan-djassah-a843b0339/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-500 hover:text-blue-500 transition-colors"
