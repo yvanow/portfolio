@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yvan Djassah — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --surface: #13141a;
+      --card: #1a1b24;
+      --border: #252633;
+      --accent: #c8f04a;
+      --accent2: #4af0c8;
+      --text: #e8e9f0;
+      --muted: #7a7d94;
+      --heading: #ffffff;
+      --tag-bg: #1e2030;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(11,12,14,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+      opacity: 0.5;
+    }
+    .hero-grid-line:nth-child(1) { left: 25%; }
+    .hero-grid-line:nth-child(2) { left: 50%; }
+    .hero-grid-line:nth-child(3) { left: 75%; }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 2rem; height: 1px;
+      background: var(--accent);
+    }
+
+    h1.hero-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.95;
+      color: var(--heading);
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.9s 0.1s ease both;
+    }
+
+    h1.hero-name span {
+      color: var(--accent);
+      font-style: italic;
+      font-family: 'Instrument Serif', serif;
+    }
+
+    .hero-role {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.75;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b0c0e;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      background: #d8ff5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(200,240,74,0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      animation: fadeUp 1s 0.6s ease both;
+    }
+    .scroll-line {
+      width: 3rem; height: 1px;
+      background: var(--muted);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scanLine 2s infinite;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .about-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--card);
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+    .info-item:hover { border-color: var(--accent); }
+
+    .info-icon {
+      font-size: 1.2rem;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .info-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .info-value {
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    /* ── SKILLS ── */
+    #skills {
+      background: var(--bg);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .skill-category {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.3rem 0.75rem;
+      border-radius: 3px;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .tag:hover {
+      background: var(--accent);
+      color: #0b0c0e;
+      border-color: var(--accent);
+    }
+
+    /* ── EDUCATION ── */
+    #education {
+      background: var(--surface);
+    }
+
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .edu-item {
+      position: relative;
+      padding: 2rem 2rem 2rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .edu-item:hover { border-color: var(--accent2); }
+
+    .edu-item::before {
+      content: '';
+      position: absolute;
+      left: -2.95rem;
+      top: 2rem;
+      width: 0.75rem; height: 0.75rem;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px var(--accent);
+    }
+
+    .edu-date {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--heading);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-school {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-sub {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.25s;
+    }
+    .contact-card:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scanLine {
+      0%   { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .scroll-hint { left: 1.5rem; }
+    }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">YD</a>
+    <ul class="nav-links">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#education">Formation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grid-line"></div>
+    <div class="hero-grid-line"></div>
+    <div class="hero-grid-line"></div>
+
+    <p class="hero-tag">Disponible — Lomé, Togo</p>
+    <h1 class="hero-name">Yvan<br/><span>Djassah</span></h1>
+    <p class="hero-role">// Développeur Web · Ingénierie Logicielle · CCNA</p>
+    <p class="hero-desc">
+      Étudiant en informatique, passionné par la construction de solutions numériques 
+      robustes — du frontend au backend, des algorithmes aux réseaux.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">→ Me contacter</a>
+      <a href="#skills" class="btn btn-secondary">Voir mes compétences</a>
+    </div>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">À propos</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Étudiant en informatique à l'Institut Africain de l'Informatique, j'ai des bases 
+          solides en programmation (Python, Java, C/C++) et en développement web (HTML, CSS, JavaScript).
+        </p>
+        <p>
+          À l'aise avec les structures de données, les algorithmes et la programmation orientée objet, 
+          je suis capable de concevoir des solutions simples et efficaces.
+        </p>
+        <p>
+          Curieux, rigoureux et doté d'une grande capacité d'apprentissage, je m'adapte rapidement 
+          à de nouveaux outils et environnements de travail.
+        </p>
+        <p style="color: var(--accent); opacity: 1;">
+          Objectif : Développer une expertise en ingénierie logicielle, administration systèmes & réseaux, 
+          et contribuer à des solutions numériques innovantes.
+        </p>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span class="tag">🎵 Musique</span>
+          <span class="tag">⚽ Football</span>
+          <span class="tag">🎮 Jeux vidéo</span>
+          <span class="tag">📚 Lecture</span>
+          <span class="tag">🏆 Hackathons</span>
+          <span class="tag">🎨 Dessin/Animation</span>
+          <span class="tag">🔬 Recherche & Innovation</span>
+        </div>
+      </div>
+
+      <div class="about-info reveal">
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value">Djassahyvan@gmail.com</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Téléphone</div>
+            <div class="info-value">+228 93 01 16 52</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Localisation</div>
+            <div class="info-value">Lomé – Togo</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🌐</div>
+          <div>
+            <div class="info-label">Langues</div>
+            <div class="info-value">Français (Courant) · Anglais (Intermédiaire)</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🏳️</div>
+          <div>
+            <div class="info-label">Nationalité</div>
+            <div class="info-value">Togolaise</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Compétences</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Langages</p>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Java</span>
+          <span class="tag">C / C++</span>
+          <span class="tag">SQL</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Développement Web</p>
+        <div class="skill-tags">
+          <span class="tag">Frontend (HTML/CSS)</span>
+          <span class="tag">Backend Django</span>
+          <span class="tag">APIs REST</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Concepts Informatiques</p>
+        <div class="skill-tags">
+          <span class="tag">POO</span>
+          <span class="tag">Structures de données</span>
+          <span class="tag">Listes / Piles / Files</span>
+          <span class="tag">Arbres</span>
+          <span class="tag">Algorithmes</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Outils & DevOps</p>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">VS Code</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Administration Système</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Réseaux (CCNA)</p>
+        <div class="skill-tags">
+          <span class="tag">Switching</span>
+          <span class="tag">Routing</span>
+          <span class="tag">WLAN</span>
+          <span class="tag">Commutation</span>
+          <span class="tag">Routage</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <p class="skill-category">// Soft Skills</p>
+        <div class="skill-tags">
+          <span class="tag">Débogage</span>
+          <span class="tag">Résolution de problèmes</span>
+          <span class="tag">Prog. compétitive</span>
+          <span class="tag">Travail en équipe</span>
+          <span class="tag">Veille technologique</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Formation</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-timeline">
+
+      <div class="edu-item reveal">
+        <div class="edu-date">2024</div>
+        <div class="edu-degree">Baccalauréat Scientifique</div>
+        <div class="edu-school">Lomé, Togo</div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-date">En cours</div>
+        <div class="edu-degree">Étudiant en Informatique</div>
+        <div class="edu-school">Institut Africain de l'Informatique — Lomé, Togo</div>
+      </div>
+
+      <div class="edu-item reveal">
+        <div class="edu-date">Avril 2026</div>
+        <div class="edu-degree">CCNA : Switching, Routing & Wireless</div>
+        <div class="edu-school">Cisco Networking Academy</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal" style="justify-content: center; text-align: center; flex-direction: column; gap: 0.5rem;">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-inner reveal">
+      <p class="contact-sub">
+        Disponible pour des projets, collaborations ou opportunités de stage.<br/>
+        N'hésitez pas à me contacter !
+      </p>
+      <div class="contact-links">
+        <a href="mailto:Djassahyvan@gmail.com" class="contact-card">
+          <span>✉️</span> Djassahyvan@gmail.com
+        </a>
+        <a href="tel:+22893011652" class="contact-card">
+          <span>📞</span> +228 93 01 16 52
+        </a>
+      </div>
+      <a href="mailto:Djassahyvan@gmail.com" class="btn btn-primary" style="margin: 0 auto; display: inline-flex;">
+        → Envoyer un message
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Yvan Djassah</span>
+    <span style="color: var(--accent);">Développeur Web · Ingénierie Logicielle</span>
+    <span>Lomé, Togo 🇹🇬</span>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth active nav link
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === '#' + current
+          ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
