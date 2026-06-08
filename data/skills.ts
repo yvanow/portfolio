@@ -4,7 +4,7 @@ export const skills = {
     { name: "PHP", level: 40 },
     { name: "Django", level: 20 },
     { name: "Python", level: 50 },
-    { name: "Node.js", level: 35 },
+    
   ],
   frontend: [
     { name: "HTML / CSS", level: 60 },
