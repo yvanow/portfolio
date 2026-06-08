@@ -7,7 +7,7 @@ export const skills = {
     { name: "Node.js", level: 35 },
   ],
   frontend: [
-    { name: "HTML / CSS", level: 65 },
+    { name: "HTML / CSS", level: 60 },
     { name: "React", level: 35 },
   ],
   database: [
@@ -15,7 +15,6 @@ export const skills = {
   ],
   devops: [
     { name: "Git / GitHub", level: 65 },
-    { name: "GitLab", level: 55 },
     { name: "Linux", level: 40 },
   ],
   languages: [

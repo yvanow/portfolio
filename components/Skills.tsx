@@ -68,10 +68,9 @@ export default function Skills() {
           </h3>
           <div className="flex flex-wrap gap-3">
             {[
-              "Java", "Spring Boot", "Python", "PHP", "Django",
-              "C / C++", "C#", "HTML", "CSS", "React",
-              "MySQL",
-              "Git", "GitHub", "GitLab", "Linux",
+              "Java", "Python", "PHP", "Django",
+              "C", "C#", "HTML", "CSS","MySQL",
+              "Git", "GitHub", "Linux",
               "Cisco CCNA", "IPv4 / IPv6", "VLANs", "OSPF",
             ].map((tech) => (
               <span

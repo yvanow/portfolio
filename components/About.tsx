@@ -21,8 +21,8 @@ const timeline = [
   },
   {
     icon: Briefcase,
-    title: "Développeur web – Freelance",
-    org: "Backend de gestion budgétaire scolaire (Java Spring Boot)",
+    title: "Développeur web ",
+    org: "Backend de gestion budgétaire scolaire (Java Spring )",
     date: "09/2025 – 12/2025",
     color: "text-orange-500",
     bg: "bg-orange-500/10",
