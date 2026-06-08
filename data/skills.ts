@@ -11,7 +11,7 @@ export const skills = {
     { name: "React", level: 35 },
   ],
   database: [
-    { name: "MySQL", level: 65 },
+    { name: "MySQL", level: 60 },
   ],
   devops: [
     { name: "Git / GitHub", level: 65 },
